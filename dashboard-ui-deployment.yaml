@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard-ui-deployment
+  namespace: app
+  labels: 
+    dashboard-ui: first
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      dashboard-ui: first
+  template:
+    metadata:
+      labels:
+        dashboard-ui: first
+    spec:
+      containers:
+      - name: dashboard-ui
+        image: <>
+        envFrom:
+          - configMapRef:
+              name: dashboard-ui-configmap
+        ports:
+        - containerPort: 3091
+        livenessProbe:
+          tcpSocket:
+            port: 3091
+        initialDelaySeconds: 15
+        periodSeconds: 15

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-api-deployment
+  namespace: app
+  labels: 
+    users-api: first
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      users-api: first
+  template:
+    metadata:
+      labels:
+        users-api: first
+    spec:
+      containers:
+      - name: users-api
+        image: <>
+        envFrom:
+          - configMapRef:
+              name: users-api-configmap
+          - secretRef:
+              name: api-secret
+        ports:
+        - containerPort: 3000
+        livenessProbe:
+          exec:
+          - /bin/sh
+          - -c
+          - "curl -f http://127.0.0.1:3000/users/health-check | grep -q 'configuration'"
+          initialDelaySeconds: 15
+          periodSeconds: 15

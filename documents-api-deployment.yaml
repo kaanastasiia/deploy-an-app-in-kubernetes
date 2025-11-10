@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: documents-api-deployment
+  namespace: app
+  labels: 
+    documents-api: first
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      documents-api: first
+  template:
+    metadata:
+      labels:
+        documents-api: first
+    spec:
+      containers:
+      - name: documents-api
+        image: <>
+        envFrom:
+          - configMapRef:
+              name: documents-api-configmap
+          - secretRef:
+              name: api-secret
+        ports:
+        - containerPort: 3001
+        livenessProbe:
+          exec:
+          - /bin/sh
+          - -c
+          - "curl -f http://127.0.0.1:3001/documents/health-check | grep -q 'configuration'"
+          initialDelaySeconds: 15
+          periodSeconds: 15
