@@ -9,7 +9,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOncePod
-  persistenVolumeReclaimPolicy: Retain
+  persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local: 
     path: /opt

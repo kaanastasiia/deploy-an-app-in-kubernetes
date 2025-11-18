@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  serviceName: "postgres"
+  replicas: 1
+  minReadySeconds: 30
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      terminationGracePeriodSeconds: 20
+      containers:
+      - name: postgres
+        image: postgres:17
+        ports:
+        - containerPort: 5432
+          name: postgres_port
+        volumeMounts:
+        - name: postgres_data
+          mountPath: /var/lib/postgresql/data
+volumeClaimTemplates:
+- metadata:
+    name: postgres_data
+  spec:
+    accessModes: [ "ReadWriteOncePod" ]
+    storageClassName: local-storage
+    resources:
+      requests:
+        storage: 5Gi
