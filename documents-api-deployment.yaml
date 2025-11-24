@@ -22,7 +22,7 @@ spec:
           - configMapRef:
               name: documents-api-configmap
           - secretRef:
-              name: api-secret
+              name: postgres-secret
         ports:
         - containerPort: 3001
         livenessProbe:

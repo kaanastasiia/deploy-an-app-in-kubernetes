@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata: 
+  name: init-db-job
+  namespace: app
+spec:
+  template:
+    spec:
+      containers:
+      - name: init-db-job 
+        image: postgres:17
+        envFrom:
+          - secretRef:
+              name: postgres-secret
+        command:
+          [
+            "sh",
+            "-c",
+            "psql -h postgres.app.svc.cluster.local -U postgres -f /opt/init.sql"
+          ]
+        restartPolicy: Never
+        volumeMounts:
+          - name: init-script
+            mountPath: /opt
+    volumes:
+      - name: init-script
+        configMap:
+          name: init-db-configMap

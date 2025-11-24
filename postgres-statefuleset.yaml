@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: postgres
+  name: postgres-db
+  namespace: app
 spec:
   selector:
     matchLabels:
@@ -18,6 +19,11 @@ spec:
       containers:
       - name: postgres
         image: postgres:17
+        envFrom:
+          - configMapRef:
+              name: postgres-configMap
+          - secretRef:
+              name: postgres-secret
         ports:
         - containerPort: 5432
           name: postgres_port

@@ -4,10 +4,8 @@ metadata:
   name: documents-api-service
   namespace: app
 spec:
-  selector:
+  selector: 
     documents-api: first
   ports:
-  - name: documents-api-port
-    protocol: TCP
-    port: 3001
+  - port: 80
     targetPort: 3001

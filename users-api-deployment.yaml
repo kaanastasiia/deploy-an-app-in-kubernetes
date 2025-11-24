@@ -20,9 +20,9 @@ spec:
         image: <>
         envFrom:
           - configMapRef:
-              name: users-api-configmap
+              name: users-api-configMap
           - secretRef:
-              name: api-secret
+              name: postgres-secret
         ports:
         - containerPort: 3000
         livenessProbe:

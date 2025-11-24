@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-configmap
+  namespace: app
+data:
+  POSTGRES_DB: "otus_users_db"
+  PGDATA: /var/lib/postgresql/data

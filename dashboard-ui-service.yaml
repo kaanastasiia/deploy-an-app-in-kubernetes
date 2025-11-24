@@ -7,7 +7,5 @@ spec:
   selector:
     dashboard-ui: first
   ports:
-  - name: dashboard-ui-port
-    protocol: TCP
-    port: 3091
+  - port: 80
     targetPort: 3091
