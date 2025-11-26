@@ -21,7 +21,7 @@ spec:
         image: postgres:17
         envFrom:
           - configMapRef:
-              name: postgres-configMap
+              name: postgres-configmap
           - secretRef:
               name: postgres-secret
         ports:

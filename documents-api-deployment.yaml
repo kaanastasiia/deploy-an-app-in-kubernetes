@@ -21,8 +21,17 @@ spec:
         envFrom:
           - configMapRef:
               name: documents-api-configmap
-          - secretRef:
-              name: postgres-secret
+        env:
+          - name: DATABASE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRES_USER
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRES_PASSWORD
         ports:
         - containerPort: 3001
         livenessProbe:

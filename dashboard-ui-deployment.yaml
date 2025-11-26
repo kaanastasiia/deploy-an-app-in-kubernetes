@@ -21,10 +21,21 @@ spec:
         envFrom:
           - configMapRef:
               name: dashboard-ui-configmap
+        env:
+          - name: DATABASE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRES_USER
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRES_PASSWORD
         ports:
         - containerPort: 3091
         livenessProbe:
           tcpSocket:
             port: 3091
-        initialDelaySeconds: 15
-        periodSeconds: 15
+          initialDelaySeconds: 15
+          periodSeconds: 15
