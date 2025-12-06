@@ -15,29 +15,32 @@ spec:
       labels:
         users-api: first
     spec:
+      imagePullSecrets:
+      - name: harbor-credentials
       containers:
       - name: users-api
-        image: <>
+        image: harbor.1.2.3.4.nip.io/app/usersapi:v1
         envFrom:
-          - configMapRef:
-              name: users-api-configmap
+        - configMapRef:
+            name: users-api-configmap
         env:
-          - name: DATABASE_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: postgres-secret
-                key: POSTGRES_USER
-          - name: DATABASE_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: postgres-secret
-                key: POSTGRES_PASSWORD
+        - name: DATABASE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_USER
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_PASSWORD
         ports:
         - containerPort: 3000
         livenessProbe:
           exec:
-          - /bin/sh
-          - -c
-          - "curl -f http://127.0.0.1:3000/users/health-check | grep -q 'configuration'"
+            command:
+            - /bin/sh
+            - -c
+            - "curl -f http://127.0.0.1:3000/users/health-check | grep -q 'configuration'"
           initialDelaySeconds: 15
           periodSeconds: 15

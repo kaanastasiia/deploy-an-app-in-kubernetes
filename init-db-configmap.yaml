@@ -1,7 +1,7 @@
 apiVersion: v1
-kind: СonfigMap
+kind: ConfigMap
 metadata:
-  name: init-db-configMap
+  name: init-db-confignap
   namespace: app
 data:
   init.sql: |

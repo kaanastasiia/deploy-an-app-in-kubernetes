@@ -8,25 +8,24 @@ spec:
   - host: 1.2.3.4.nip.io
     http:
       paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service: 
-              name: dashboard-ui-service
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: dashboard-ui-service
             port:
               number: 80
-        - path: /users-api
-          pathType: Prefix
-          backend:
-            service: 
-              name: users-api-service
+      - path: /users-api
+        pathType: Prefix
+        backend:
+          service:
+            name: users-api-service
             port:
               number: 80
-        - path: /documents-api
-          pathType: Prefix
-          backend:
-            service: 
-              name: documents-api-service
+      - path: /documents-api
+        pathType: Prefix
+        backend:
+          service:
+            name: documents-api-service
             port:
               number: 80
-  

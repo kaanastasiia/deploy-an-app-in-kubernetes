@@ -8,5 +8,5 @@ spec:
     app: postgres
   ports:
   - port: 5432
-    targetPort: postgres_port
-  clusterIP: none
+    targetPort: 5432
+  clusterIP: None

@@ -26,16 +26,16 @@ spec:
               name: postgres-secret
         ports:
         - containerPort: 5432
-          name: postgres_port
+          name: postgres-port
         volumeMounts:
-        - name: postgres_data
+        - name: postgres-data
           mountPath: /var/lib/postgresql/data
-volumeClaimTemplates:
-- metadata:
-    name: postgres_data
-  spec:
-    accessModes: [ "ReadWriteOncePod" ]
-    storageClassName: local-storage
-    resources:
-      requests:
-        storage: 5Gi
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-data
+    spec:
+      accessModes: [ "ReadWriteOncePod" ]
+      storageClassName: local-storage
+      resources:
+        requests:
+          storage: 5Gi

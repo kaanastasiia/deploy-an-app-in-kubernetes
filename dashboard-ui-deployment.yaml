@@ -15,23 +15,25 @@ spec:
       labels:
         dashboard-ui: first
     spec:
+      imagePullSecrets:
+      - name: harbor-credentials
       containers:
       - name: dashboard-ui
-        image: <>
+        image: harbor.1.2.3.4.nip.io/app/dashboardui:v1
         envFrom:
-          - configMapRef:
-              name: dashboard-ui-configmap
+        - configMapRef:
+            name: dashboard-ui-configmap
         env:
-          - name: DATABASE_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: postgres-secret
-                key: POSTGRES_USER
-          - name: DATABASE_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: postgres-secret
-                key: POSTGRES_PASSWORD
+        - name: DATABASE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_USER
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_PASSWORD
         ports:
         - containerPort: 3091
         livenessProbe:
