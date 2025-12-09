@@ -5,7 +5,7 @@ metadata:
   namespace: app
 spec:
   rules:
-  - host: 1.2.3.4.nip.io
+  - host: 4.2.1.1.nip.io
     http:
       paths:
       - path: /
@@ -15,14 +15,14 @@ spec:
             name: dashboard-ui-service
             port:
               number: 80
-      - path: /users-api
+      - path: /users
         pathType: Prefix
         backend:
           service:
             name: users-api-service
             port:
               number: 80
-      - path: /documents-api
+      - path: /documents
         pathType: Prefix
         backend:
           service:

@@ -1,0 +1,27 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: envoy-rewrite
+  namespace: app
+spec:
+  virtualhost:
+    fqdn: 4.2.1.1.nip.io
+  routes:
+  - conditions:
+    - prefix: /users
+    services:
+    - name: users-api-service
+      port: 80
+    pathRewritePolicy:
+      replacePrefix:
+      - prefix: /users
+        replacement: /
+  - conditions:
+    - prefix: /documents
+    services:
+    - name: documents-api-service
+      port: 80
+    pathRewritePolicy:
+      replacePrefix:
+      - prefix: /documents
+        replacement: /
