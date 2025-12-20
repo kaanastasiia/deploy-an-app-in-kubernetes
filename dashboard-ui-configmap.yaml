@@ -6,5 +6,5 @@ metadata:
 data:
   PORT: "3091"
   HOST: "0.0.0.0"
-  USERS_API_BASE_URL: "users"
-  DOCUMENTS_API_BASE_URL: "documents"
+  USERS_API_BASE_URL: "http://4.2.1.1.nip.io:30312"
+  DOCUMENTS_API_BASE_URL: "http://4.2.1.1.nip.io:30312"
